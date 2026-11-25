@@ -1,0 +1,50 @@
+import sys
+
+def calculate_grade(grades):
+    average = sum(grades) / len(grades)
+
+    if average >= 90:
+        grade = "A"
+    elif average >= 80:
+        grade = "B"
+    elif average >= 70:
+        grade = "C"
+    elif average >= 60:
+        grade = "D"
+    elif average >= 50:
+        grade = "E"
+    else:
+        grade = "F"
+
+    return average, grade
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: StudentGrade.py grade1 grade2 ...")
+        return
+
+    try:
+        grades = [float(x) for x in sys.argv[1:]]
+
+        if any(g < 0 or g > 100 for g in grades):
+            print("Grades must be between 0 and 100")
+            return
+
+        average, grade = calculate_grade(grades)
+
+        print("Grades:", grades)
+        print("Average:", round(average, 2))
+        print("Grade:", grade)
+
+        if average >= 50:
+            print("Result: PASS")
+        else:
+            print("Result: FAIL")
+
+    except ValueError:
+        print("Please enter valid numbers")
+
+
+if __name__ == "__main__":
+    main()
